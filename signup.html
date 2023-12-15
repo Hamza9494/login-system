@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <link rel="stylesheet" href="signup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Singup</h2>
+      <form class="form" action="process-signup.php" method="post">
+        <div class="form-control">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" />
+          <small>error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input name="email" id="email" />
+          <small>error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" />
+          <small>error message</small>
+        </div>
+
+        <div class="form-control">
+          <label for="password_confirmation">Repeat Password</label>
+          <input
+            type="password"
+            name="password_confirmation"
+            id="password_confirmation"
+          />
+          <small>error message</small>
+        </div>
+
+        <button class="btn" type="submit">Singup</button>
+      </form>
+    </div>
+    <script src="signup.js"></script>
+  </body>
+</html>
