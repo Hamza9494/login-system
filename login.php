@@ -18,7 +18,7 @@ $credentials = json_decode(file_get_contents("php://input"), true);
 
 $mysqli = require __DIR__ . "/database.php";
 
-$sql = sprintf("SELECT * FROM user WHERE email = '%s'",  $mysqli->real_escape_string($credentials['email']));
+$sql = sprintf("SELECT * FROM users WHERE email = '%s'",  $mysqli->real_escape_string($credentials['email']));
 
 
 $result = $mysqli->query($sql);
