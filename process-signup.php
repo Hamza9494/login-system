@@ -25,7 +25,7 @@ if (!preg_match("/[0-9]/", $credentials['password'])) {
     die('password must be contain at least one number');
 }
 
-if ($credentials['password'] !== $credentials['password_confirmation']) {
+if ($credentials['password'] !== $credentials['password_confirm']) {
     die('password does not match');
 }
 
@@ -37,7 +37,7 @@ $password_hash = password_hash($credentials['password'], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ .  '/database.php';
 
-$sql = "INSERT INTO user (name , email , password_hash , account_activation_hash) VALUE (? , ? , ? , ?) ";
+$sql = "INSERT INTO users (name , email , password_hash , account_activation_hash) VALUE (? , ? , ? , ?) ";
 
 $stmt = $mysqli->prepare($sql);
 
@@ -54,7 +54,7 @@ if ($stmt->execute()) {
     $mail->isHTML(true);
     $mail->Subject = " Account Activation";
     $mail->Body = <<<END
-    Click <a href= "http://localhost/projects/new_login_system/activate-account.php?token=$activation_token" >  here </a>  to activate your account.
+    Click <a href= "http://localhost/projects/login-system/activate-account.php?token=$activation_token" >  here </a>  to activate your account.
  END;
 
     $mail->send();

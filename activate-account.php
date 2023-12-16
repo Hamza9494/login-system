@@ -5,7 +5,7 @@ $token_hash = hash('sha256', $token);
 
 $mysqli = require __DIR__ . "/database.php";
 
-$sql = "SELECT * FROM user WHERE account_activation_hash = ? ";
+$sql = "SELECT * FROM users WHERE account_activation_hash = ? ";
 
 $stmt = $mysqli->prepare($sql);
 
@@ -21,7 +21,7 @@ if (!$user) {
     die('No unactivated account to activate!');
 }
 
-$sql = "UPDATE user SET account_activation_hash = NULL WHERE id = ? ";
+$sql = "UPDATE users SET account_activation_hash = NULL WHERE id = ? ";
 
 $stmt = $mysqli->prepare($sql);
 
@@ -29,20 +29,23 @@ $stmt->bind_param('s', $user['id']);
 
 $stmt->execute();
 
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Activated</title>
 </head>
-
 <body>
-    <h2>Account activated successfully</h2>
-    <p>you can now <a href="login.php">login!</a></p>
+    <h1>account activated successufly!</h1>
+    <h2>you dont have to login arthur cuz u are my dear friend whom i love so much</h2>
 </body>
-
 </html>
+
+ 
+
+
+ 
