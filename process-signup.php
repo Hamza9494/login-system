@@ -13,6 +13,7 @@ if (!filter_var($credentials['email'], FILTER_VALIDATE_EMAIL)) {
     die("invalid email");
 }
 
+ 
 if (strlen($credentials['password']) < 8) {
     die('password must be at least 8 characters');
 }
