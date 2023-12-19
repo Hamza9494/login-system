@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
@@ -30,6 +32,7 @@ if ($credentials['password'] !== $credentials['password_confirm']) {
     die('password does not match');
 }
 
+ 
 $activation_token = bin2hex(random_bytes(16));
 
 $activation_token_hash = hash('sha256', $activation_token);
@@ -38,12 +41,15 @@ $password_hash = password_hash($credentials['password'], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ .  '/database.php';
 
-$sql = "INSERT INTO users (name , email , password_hash , account_activation_hash) VALUE (? , ? , ? , ?) ";
+
+$sql = "INSERT INTO users  (name , email , password_hash ,account_activation_hash) VALUE ( ? , ? ,  ? , ? ) ";
 
 $stmt = $mysqli->prepare($sql);
 
-$stmt->bind_param('ssss', $credentials['name'], $credentials['email'], $password_hash, $activation_token_hash);
 
+$stmt->bind_param('ssss' , $credentials['name'] , $credentials['email'] , $password_hash , $activation_token_hash);
+
+ 
 if ($stmt->execute()) {
     $mail = require __DIR__ . "/mailer.php";
 
@@ -59,7 +65,7 @@ if ($stmt->execute()) {
  END;
 
     $mail->send();
-    echo json_encode(["message" => "data recived", "userData" => $credentials]);
+    echo json_encode(["message" => "data recived" , "user_data" => $credentials]);
     exit;
 } else if ($mysqli->errno === 1062) {
     die("email already exists my dude");
